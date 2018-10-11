@@ -255,9 +255,9 @@ public class ChatBot3
 			return randomNeutralResponses [r.nextInt(randomNeutralResponses.length)];
 		}
 		if (emotion < 0)
-		{	
+		{
 			return randomAngryResponses [r.nextInt(randomAngryResponses.length)];
-		}	
+		}
 		return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
 	}
 	
@@ -265,11 +265,29 @@ public class ChatBot3
 			"Hmmm.",
 			"Do you really think so?",
 			"You don't say.",
-			"It's all boolean to me.",
-			"So, would you like to go for a walk?",
-			"Could you say that again?"
+			"It's all music to me.",
+			"So, would you like to go for a song?",
+			"Could you sing that again?"
 	};
 	private String [] randomAngryResponses = {"Bahumbug.", "Harumph", "The rage consumes me!"};
-	private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Today is a good day", "You make me feel like a brand new pair of shoes."};
+	private String [] randomHappyResponses = {"Huh, because I'm happy" +
+            "Clap along if you feel like a room without a roof" +
+            "Because I'm happy" +
+            "Clap along if you feel like happiness is the truth" +
+            "Because I'm happy" +
+            "Clap along if you know what happiness is to you" +
+            "Because I'm happy" +
+            "Clap along if you feel like that's what you wanna do",
+            "I had a dream so big and loud" +
+            "I jumped so high I touched the clouds" +
+            "Wo-o-o-o-o-oh, wo-o-o-o-o-oh" +
+            "I stretched my hands out to the sky" +
+            "We danced with monsters through the night" +
+            "Wo-o-o-o-o-oh, wo-o-o-o-o-oh",
+            "Oh" +
+            "It's a beautiful night, we're looking for something dumb to do" +
+            "Hey baby, I think I wanna marry you" +
+            "Is it the look in your eyes, or is it this dancing juice" +
+            "Who cares baby, I think I wanna marry you"};
 	
 }
