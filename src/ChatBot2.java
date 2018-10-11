@@ -260,15 +260,31 @@ public class ChatBot2
 		return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
 	}
 	
-	private String [] randomNeutralResponses = {"Interesting, tell me more",
-			"Hmmm.",
-			"Do you really think so?",
-			"You don't say.",
+	private String [] randomNeutralResponses = {"Yo that sounds valid, tell me more",
+			"Das tuff",
+			"Are you for real?",
+			"Yo you remember the lyrics to ?",
 			"It's all boolean to me.",
-			"So, would you like to go for a walk?",
-			"Could you say that again?"
+			"Yo you tryna bump some ?",
+			"Yo lets get back to hip hop aight?"
 	};
-	private String [] randomAngryResponses = {"Bahumbug.", "Harumph", "The rage consumes me!"};
-	private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Today is a good day", "You make me feel like a brand new pair of shoes."};
-	
+	private String [] randomAngryResponses = {"Yo what you tweakin' for?", "Do you actually wanna fight? I'm down", ""};
+	private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Yo today's been dumb valid so far", "You make me feel like a brand new pair of shoes."};
+	private String [] butterflyEffect = {"For this life I cannot change",
+			"Hidden hills, deep off in the main",
+			"M&M's, sweet like candy canes",
+			"Drop the top, pop it, let it bang",
+			"Drop the top, play hide and seek",
+			"Jump inside, jump straight to the league",
+			"Take a sip, feel just how I be",
+			"On freeway, but no, ain't nothin' free",
+			"Bend laws, bend lanes",
+			"Been bustin' bills, but still, ain't nothin' change",
+			"You in the mob soon as you rock the chain",
+			"She caught the waves just thumbin' through my braids",
+			"Heatin' up, baby, I'm just heatin' up",
+			"Need ya love, not a need it is a must",
+			"Feelin' stuck, you know how to keep me up",
+			"Icy love, icy like a hockey puck"
+	};
 }
