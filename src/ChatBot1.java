@@ -1,6 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
-
+//Jack Hoang
 /**
  * A program to carry on conversations with a human user.
  * This version:
@@ -24,28 +24,24 @@ public class ChatBot1
 
 		while (!statement.equals("Bye"))
 		{
-
-
 			statement = in.nextLine();
 			//getResponse handles the user reply
 			System.out.println(getResponse(statement));
-
-
 		}
 
 	}
 	/**
-	 * Get a default greeting 	
+	 * Get a default greeting
 	 * @return a greeting
-	 */	
+	 */
 	public String getGreeting()
 	{
-		return "Hi, what is up?";
+		return "Hey, what do you listen to?";
 	}
-	
+
 	/**
 	 * Gives a response to a user statement
-	 * 
+	 *
 	 * @param statement
 	 *            the user statement
 	 * @return a response based on the rules given
@@ -53,7 +49,7 @@ public class ChatBot1
 	public String getResponse(String statement)
 	{
 		String response = "";
-		
+
 		if (statement.length() == 0)
 		{
 			response = "Say something, please.";
@@ -61,26 +57,24 @@ public class ChatBot1
 
 		else if (findKeyword(statement, "no") >= 0)
 		{
-			response = "Why so negative?";
-                	emotion--;
+			response = "Oh ok then.";
+			emotion--;
 		}
-		
-		else if (findKeyword(statement, "levin") >= 0)
+
+		else if (findKeyword(statement, "sorry") >= 0)
 		{
-			response = "More like LevinTheDream, amiright?";
-			emotion++;
-		}
-		else if (findKeyword(statement, "folwell") >= 0)
-		{
-			response = "Watch your backpacks, Mr. Folwell doesn't fall well.";
-			emotion++;
-		}
-		else if (findKeyword(statement, "goldman") >= 0)
-		{
-			response = "Go for the gold, man.";
+			response = "I forgive you.";
 			emotion++;
 		}
 
+		else if (findKeyword(statement, "I listen to", 0) >= 0)
+		{
+			response = transformILikeToListenToStatement(statement);
+		}
+		else if (findKeyword(statement, "I like",0) >= 0)
+		{
+			response = transformILikeStatement(statement);
+		}
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to", 0) >= 0)
 		{
@@ -89,17 +83,17 @@ public class ChatBot1
 		else if (findKeyword(statement, "I want",0) >= 0)
 		{
 			response = transformIWantStatement(statement);
-		}	
+		}
 		else
 		{
 			response = getRandomResponse();
 		}
-		
+
 		return response;
 	}
-	
+
 	/**
-	 * Take a statement with "I want to <something>." and transform it into 
+	 * Take a statement with "I want to <something>." and transform it into
 	 * "Why do you want to <something>?"
 	 * @param statement the user statement, assumed to contain "I want to"
 	 * @return the transformed statement
@@ -120,9 +114,9 @@ public class ChatBot1
 		return "Why do you want to " + restOfStatement + "?";
 	}
 
-	
+
 	/**
-	 * Take a statement with "I want <something>." and transform it into 
+	 * Take a statement with "I want <something>." and transform it into
 	 * "Would you really be happy if you had <something>?"
 	 * @param statement the user statement, assumed to contain "I want"
 	 * @return the transformed statement
@@ -142,10 +136,41 @@ public class ChatBot1
 		String restOfStatement = statement.substring(psn + 6).trim();
 		return "Would you really be happy if you had " + restOfStatement + "?";
 	}
-	
-	
+
+	private String transformILikeToListenToStatement(String statement)
+	{
+		//  Remove the final period, if there is one
+		statement = statement.trim();
+		String lastChar = statement.substring(statement
+				.length() - 1);
+		if (lastChar.equals("."))
+		{
+			statement = statement.substring(0, statement
+					.length() - 1);
+		}
+		int psn = findKeyword (statement, "I like to listen to", 0);
+		String restOfStatement = statement.substring(psn + 19).trim();
+		return "Why do you like to listen to " + restOfStatement + "?";
+	}
+
+	private String transformILikeStatement(String statement)
+	{
+		//  Remove the final period, if there is one
+		statement = statement.trim();
+		String lastChar = statement.substring(statement
+				.length() - 1);
+		if (lastChar.equals("."))
+		{
+			statement = statement.substring(0, statement
+					.length() - 1);
+		}
+		int psn = findKeyword (statement, "I like", 0);
+		String restOfStatement = statement.substring(psn + 6).trim();
+		return "Why do you like " + restOfStatement + "?";
+	}
+
 	/**
-	 * Take a statement with "I <something> you" and transform it into 
+	 * Take a statement with "I <something> you" and transform it into
 	 * "Why do you <something> me?"
 	 * @param statement the user statement, assumed to contain "I" followed by "you"
 	 * @return the transformed statement
@@ -161,17 +186,17 @@ public class ChatBot1
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		
+
 		int psnOfI = findKeyword (statement, "I", 0);
 		int psnOfYou = findKeyword (statement, "you", psnOfI);
-		
+
 		String restOfStatement = statement.substring(psnOfI + 1, psnOfYou).trim();
 		return "Why do you " + restOfStatement + " me?";
 	}
-	
 
-	
-	
+
+
+
 	/**
 	 * Search for one word in phrase. The search is not case
 	 * sensitive. This method will check that the given goal
@@ -189,7 +214,7 @@ public class ChatBot1
 	 *         statement or -1 if it's not found
 	 */
 	private int findKeyword(String statement, String goal,
-			int startPos)
+							int startPos)
 	{
 		String phrase = statement.trim().toLowerCase();
 		goal = goal.toLowerCase();
@@ -220,9 +245,9 @@ public class ChatBot1
 			// found the word
 			if (((before.compareTo("a") < 0) || (before
 					.compareTo("z") > 0)) // before is not a
-											// letter
+					// letter
 					&& ((after.compareTo("a") < 0) || (after
-							.compareTo("z") > 0)))
+					.compareTo("z") > 0)))
 			{
 				return psn;
 			}
@@ -235,11 +260,11 @@ public class ChatBot1
 
 		return -1;
 	}
-	
+
 	/**
 	 * Search for one word in phrase.  The search is not case sensitive.
 	 * This method will check that the given goal is not a substring of a longer string
-	 * (so, for example, "I know" does not contain "no").  The search begins at the beginning of the string.  
+	 * (so, for example, "I know" does not contain "no").  The search begins at the beginning of the string.
 	 * @param statement the string to search
 	 * @param goal the string to search for
 	 * @return the index of the first occurrence of goal in statement or -1 if it's not found
@@ -248,7 +273,7 @@ public class ChatBot1
 	{
 		return findKeyword (statement, goal, 0);
 	}
-	
+
 
 
 	/**
@@ -259,16 +284,16 @@ public class ChatBot1
 	{
 		Random r = new Random ();
 		if (emotion == 0)
-		{	
+		{
 			return randomNeutralResponses [r.nextInt(randomNeutralResponses.length)];
 		}
 		if (emotion < 0)
-		{	
+		{
 			return randomAngryResponses [r.nextInt(randomAngryResponses.length)];
-		}	
+		}
 		return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
 	}
-	
+
 	private String [] randomNeutralResponses = {"Interesting, tell me more",
 			"Hmmm.",
 			"Do you really think so?",
@@ -279,5 +304,6 @@ public class ChatBot1
 	};
 	private String [] randomAngryResponses = {"Bahumbug.", "Harumph", "The rage consumes me!"};
 	private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Today is a good day", "You make me feel like a brand new pair of shoes."};
-	
+
 }
+
