@@ -36,7 +36,7 @@ public class ChatBot1
 	 */
 	public String getGreeting()
 	{
-		return "Hey, what do you listen to?";
+		return "Hey, wanna know more about Vocaloid?";
 	}
 
 	/**
@@ -67,6 +67,31 @@ public class ChatBot1
 			emotion++;
 		}
 
+        else if (findKeyword(statement, "because") >= 0)
+        {
+            response = "Oh that's interesting. Wanna talk about something else?";
+        }
+
+        else if (findKeyword(statement, "thanks") >= 0)
+        {
+            response = "Your welcome?";
+        }
+
+        else if (findKeyword(statement, "yes") >= 0)
+        {
+            response = "Vocaloid is music sung by software. Some artists include Jin, Deco*27 ";
+        }
+
+        else if (findKeyword(statement, "ya") >= 0)
+        {
+            response = "Vocaloid is music sung by software. Some artists include Jin, Deco*27 ";
+        }
+
+        else if (findKeyword(statement, "sure") >= 0)
+        {
+            response = "Vocaloid is music sung by software. Some artists include Jin, Deco*27 ";
+        }
+
 		else if (findKeyword(statement, "I listen to", 0) >= 0)
 		{
 			response = transformILikeToListenToStatement(statement);
@@ -84,6 +109,10 @@ public class ChatBot1
 		{
 			response = transformIWantStatement(statement);
 		}
+        else if (findKeyword(statement, "vocaloid",0) >= 0)
+        {
+            response = transformVocaloidStatement(statement);
+        }
 		else
 		{
 			response = getRandomResponse();
@@ -168,6 +197,22 @@ public class ChatBot1
 		String restOfStatement = statement.substring(psn + 6).trim();
 		return "Why do you like " + restOfStatement + "?";
 	}
+
+	private  String transformVocaloidStatement (String statement)
+    {
+        //  Remove the final period, if there is one
+        statement = statement.trim();
+        String lastChar = statement.substring(statement
+                .length() - 1);
+        if (lastChar.equals("."))
+        {
+            statement = statement.substring(0, statement
+                    .length() - 1);
+        }
+        int psn = findKeyword (statement, "vocaloid", 0);
+        String restOfStatement = statement.substring(1, psn).trim();
+        return "Why do you " + restOfStatement + " vocaloid?";
+    }
 
 	/**
 	 * Take a statement with "I <something> you" and transform it into
@@ -298,12 +343,12 @@ public class ChatBot1
 			"Hmmm.",
 			"Do you really think so?",
 			"You don't say.",
-			"It's all boolean to me.",
-			"So, would you like to go for a walk?",
+			"Goodness.",
+			"Oh dear.",
 			"Could you say that again?"
 	};
-	private String [] randomAngryResponses = {"Bahumbug.", "Harumph", "The rage consumes me!"};
-	private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Today is a good day", "You make me feel like a brand new pair of shoes."};
+	private String [] randomAngryResponses = {"Now I'm angry.", "My patience is running thin.", "I'm not impressed."};
+	private String [] randomHappyResponses = {"Your an interesting person.", "Today is a good day.", "I hope your having a great day."};
 
 }
 
