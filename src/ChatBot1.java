@@ -11,6 +11,7 @@ public class ChatBot1
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	int emotion = 0;
+	int responseStage = 0;
 
 	/**
 	 * Runs the conversation for this particular chatbot, should allow switching to other chatbots.
@@ -26,7 +27,12 @@ public class ChatBot1
 		{
 			statement = in.nextLine();
 			//getResponse handles the user reply
-			System.out.println(getResponse(statement));
+			if (responseStage == 0) {
+				System.out.println(getResponse(statement));
+			}
+			if (responseStage == 1) {
+				System.out.println(getResponse2(statement));
+			}
 		}
 
 	}
@@ -80,16 +86,19 @@ public class ChatBot1
         else if (findKeyword(statement, "yes") >= 0)
         {
             response = "Vocaloid is music sung by software. Some artists include Jin, Deco*27 ";
+            responseStage++;
         }
 
         else if (findKeyword(statement, "ya") >= 0)
         {
             response = "Vocaloid is music sung by software. Some artists include Jin, Deco*27 ";
+            responseStage++;
         }
 
         else if (findKeyword(statement, "sure") >= 0)
         {
             response = "Vocaloid is music sung by software. Some artists include Jin, Deco*27 ";
+            responseStage++;
         }
 
 		else if (findKeyword(statement, "I listen to", 0) >= 0)
@@ -109,10 +118,6 @@ public class ChatBot1
 		{
 			response = transformIWantStatement(statement);
 		}
-        else if (findKeyword(statement, "vocaloid",0) >= 0)
-        {
-            response = transformVocaloidStatement(statement);
-        }
 		else
 		{
 			response = getRandomResponse();
@@ -121,6 +126,53 @@ public class ChatBot1
 		return response;
 	}
 
+	public String getResponse2(String statement)
+	{
+		String response = "";
+
+		if (statement.length() == 0)
+		{
+			response = "Say something, please.";
+		}
+
+		else if (findKeyword(statement, "no") >= 0)
+		{
+			response = "Oh ok then.";
+			emotion--;
+		}
+
+		else if (findKeyword(statement, "sorry") >= 0)
+		{
+			response = "I forgive you.";
+			emotion++;
+		}
+
+		else if (findKeyword(statement, "thanks") >= 0)
+		{
+			response = "Your welcome?";
+		}
+
+		else if (findKeyword(statement, "Jin") >= 0)
+		{
+			response = "Great";
+		}
+
+		else if (findKeyword(statement, "Deco*27") >= 0)
+		{
+			response = "That is also great.";
+		}
+
+		else if (findKeyword(statement, "vocaloid",0) >= 0)
+		{
+			response = transformVocaloidStatement(statement);
+		}
+		else
+		{
+			response = getRandomResponse();
+		}
+
+		return response;
+	}
 	/**
 	 * Take a statement with "I want to <something>." and transform it into
 	 * "Why do you want to <something>?"
