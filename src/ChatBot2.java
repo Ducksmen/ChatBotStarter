@@ -36,17 +36,17 @@ public class ChatBot2
 
 	}
 	/**
-	 * Get a default greeting 	
+	 * Get a default greeting
 	 * @return a greeting
-	 */	
+	 */
 	public String getGreeting()
 	{
 		return "Hi, what is up?";
 	}
-	
+
 	/**
 	 * Gives a response to a user statement
-	 * 
+	 *
 	 * @param statement
 	 *            the user statement
 	 * @return a response based on the rules given
@@ -54,8 +54,13 @@ public class ChatBot2
 	public String getResponse(String statement)
 	{
 		String response = "";
-		
-		if (statement.length() == 0)
+
+		if (trackLyrics(statement))
+		{
+			response = transformbutterflyEffect(statement);
+		}
+
+		else if (statement.length() == 0)
 		{
 			response = "Say something, please.";
 		}
@@ -63,9 +68,9 @@ public class ChatBot2
 		else if (findKeyword(statement, "no") >= 0)
 		{
 			response = "Why so negative?";
-                	emotion--;
+			emotion--;
 		}
-		
+
 		else if (findKeyword(statement, "levin") >= 0)
 		{
 			response = "More like LevinTheDream amiright?";
@@ -80,17 +85,17 @@ public class ChatBot2
 		else if (findKeyword(statement, "I want",0) >= 0)
 		{
 			response = transformIWantStatement(statement);
-		}	
+		}
 		else
 		{
 			response = getRandomResponse();
 		}
-		
+
 		return response;
 	}
-	
+
 	/**
-	 * Take a statement with "I want to <something>." and transform it into 
+	 * Take a statement with "I want to <something>." and transform it into
 	 * "Why do you want to <something>?"
 	 * @param statement the user statement, assumed to contain "I want to"
 	 * @return the transformed statement
@@ -111,9 +116,9 @@ public class ChatBot2
 		return "Why do you want to " + restOfStatement + "?";
 	}
 
-	
+
 	/**
-	 * Take a statement with "I want <something>." and transform it into 
+	 * Take a statement with "I want <something>." and transform it into
 	 * "Would you really be happy if you had <something>?"
 	 * @param statement the user statement, assumed to contain "I want"
 	 * @return the transformed statement
@@ -133,10 +138,10 @@ public class ChatBot2
 		String restOfStatement = statement.substring(psn + 6).trim();
 		return "Would you really be happy if you had " + restOfStatement + "?";
 	}
-	
-	
+
+
 	/**
-	 * Take a statement with "I <something> you" and transform it into 
+	 * Take a statement with "I <something> you" and transform it into
 	 * "Why do you <something> me?"
 	 * @param statement the user statement, assumed to contain "I" followed by "you"
 	 * @return the transformed statement
@@ -152,17 +157,33 @@ public class ChatBot2
 			statement = statement.substring(0, statement
 					.length() - 1);
 		}
-		
+
 		int psnOfI = findKeyword (statement, "I", 0);
 		int psnOfYou = findKeyword (statement, "you", psnOfI);
-		
+
 		String restOfStatement = statement.substring(psnOfI + 1, psnOfYou).trim();
 		return "Why do you " + restOfStatement + " me?";
 	}
-	
 
-	
-	
+	private String transformbutterflyEffect(String statement)
+	{
+		for (int i = 0; i < butterflyEffect.length; i++)
+		{
+			if (butterflyEffect[i].equals(statement))
+			{
+				if (i == butterflyEffect.length - 1)
+				{
+					return "Aight aight that's all I remember I'm sorry";
+				}
+				return butterflyEffect[i + 1];
+			}
+		}
+		return null ;
+	}
+
+
+
+
 	/**
 	 * Search for one word in phrase. The search is not case
 	 * sensitive. This method will check that the given goal
@@ -180,7 +201,7 @@ public class ChatBot2
 	 *         statement or -1 if it's not found
 	 */
 	private int findKeyword(String statement, String goal,
-			int startPos)
+							int startPos)
 	{
 		String phrase = statement.trim().toLowerCase();
 		goal = goal.toLowerCase();
@@ -211,9 +232,9 @@ public class ChatBot2
 			// found the word
 			if (((before.compareTo("a") < 0) || (before
 					.compareTo("z") > 0)) // before is not a
-											// letter
+					// letter
 					&& ((after.compareTo("a") < 0) || (after
-							.compareTo("z") > 0)))
+					.compareTo("z") > 0)))
 			{
 				return psn;
 			}
@@ -226,11 +247,11 @@ public class ChatBot2
 
 		return -1;
 	}
-	
+
 	/**
 	 * Search for one word in phrase.  The search is not case sensitive.
 	 * This method will check that the given goal is not a substring of a longer string
-	 * (so, for example, "I know" does not contain "no").  The search begins at the beginning of the string.  
+	 * (so, for example, "I know" does not contain "no").  The search begins at the beginning of the string.
 	 * @param statement the string to search
 	 * @param goal the string to search for
 	 * @return the index of the first occurrence of goal in statement or -1 if it's not found
@@ -239,7 +260,7 @@ public class ChatBot2
 	{
 		return findKeyword (statement, goal, 0);
 	}
-	
+
 
 
 	/**
@@ -250,21 +271,33 @@ public class ChatBot2
 	{
 		Random r = new Random ();
 		if (emotion == 0)
-		{	
+		{
 			return randomNeutralResponses [r.nextInt(randomNeutralResponses.length)];
 		}
 		if (emotion < 0)
-		{	
+		{
 			return randomAngryResponses [r.nextInt(randomAngryResponses.length)];
-		}	
+		}
 		return randomHappyResponses [r.nextInt(randomHappyResponses.length)];
 	}
-	
+
+	private boolean trackLyrics(String statement)
+	{
+		for (int i = 0; i < butterflyEffect.length; i++)
+		{
+			if (butterflyEffect[i].equals(statement))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private String [] randomNeutralResponses = {"Yo that sounds valid, tell me more",
 			"Das tuff",
 			"Are you for real?",
 			"Yo you remember the lyrics to ?",
-			"It's all boolean to me.",
+			"Don't trip man, iss all good",
 			"Yo you tryna bump some ?",
 			"Yo lets get back to hip hop aight?"
 	};
@@ -285,6 +318,7 @@ public class ChatBot2
 			"Heatin' up, baby, I'm just heatin' up",
 			"Need ya love, not a need it is a must",
 			"Feelin' stuck, you know how to keep me up",
-			"Icy love, icy like a hockey puck"
+			"Icy love, icy like a hockey puck",
 	};
 }
+
