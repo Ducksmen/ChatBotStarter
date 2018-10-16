@@ -22,24 +22,22 @@ public class ChatBot1
 		Scanner in = new Scanner (System.in);
 		System.out.println (getGreeting());
 
-
 		while (!statement.equals("Bye"))
 		{
 			statement = in.nextLine();
 			//getResponse handles the user reply
-			if (responseStage == 0) {
-				System.out.println(getResponse(statement));
-			}
 			if (responseStage == 1) {
 				System.out.println(getResponse2(statement));
 			}
+			if (responseStage == 0) {
+				System.out.println(getResponse(statement));
+			}
 		}
-
 	}
 	/**
 	 * Get a default greeting
 	 * @return a greeting
-	 */
+	 */;
 	public String getGreeting()
 	{
 		return "Hey, wanna know more about Vocaloid?";
@@ -137,13 +135,13 @@ public class ChatBot1
 
 		else if (findKeyword(statement, "no") >= 0)
 		{
-			response = "Oh ok then.";
+			response = "Oh ok then. What do you like?";
 			emotion--;
 		}
 
 		else if (findKeyword(statement, "sorry") >= 0)
 		{
-			response = "I forgive you.";
+			response = "I forgive you. Let's continue on.";
 			emotion++;
 		}
 
