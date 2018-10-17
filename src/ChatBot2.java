@@ -11,6 +11,8 @@ public class ChatBot2
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	int emotion = 0;
+	int sn = 0;
+	int an = 0;
 
 
 	/**
@@ -60,26 +62,34 @@ public class ChatBot2
 			response = transformbutterflyEffect(statement);
 		}
 
-		if (trackLyricsTTS(statement))
+		else if (trackLyricsTTS(statement))
 		{
 			response = transformtouchTheSky(statement);
+		}
+		else if (trackLyricsIAHTT(statement))
+		{
+			response = transformitAintHardToTell(statement);
 		}
 
 		else if (statement.length() == 0)
 		{
-			response = "Say something, please.";
+			response = "My son you gotta talk";
 		}
 
 		else if (findKeyword(statement, "no") >= 0)
 		{
-			response = "Why so negative?";
+			response = "No? You don't gotta be like that c'mon";
 			emotion--;
 		}
 
-		else if (findKeyword(statement, "levin") >= 0)
+		else if (findKeyword(statement, "hip hop") >= 0)
 		{
-			response = "More like LevinTheDream amiright?";
+			response = "Yo my bad I just get hype whenever I hear hip hop";
 			emotion++;
+		}
+		else if (findKeyword(statement, "I",0) >= 0 && findKeyword (statement, "you") > findKeyword(statement, "I",0))
+		{
+			response = transformIYouStatement(statement);
 		}
 
 		// Response transforming I want to statement
@@ -91,8 +101,14 @@ public class ChatBot2
 		{
 			response = transformIWantStatement(statement);
 		}
+		else if (findKeyword(statement, "I like",0) >= 0)
+		{
+			response = transformIlikeStatement(statement);
+		}
 		else
 		{
+			an = (int)Math.random()*30;
+			sn = (int)Math.random()*3;
 			response = getRandomResponse();
 		}
 
@@ -118,7 +134,7 @@ public class ChatBot2
 		}
 		int psn = findKeyword (statement, "I want to", 0);
 		String restOfStatement = statement.substring(psn + 9).trim();
-		return "Why do you want to " + restOfStatement + "?";
+		return "Aight bet cuz I wanna " + restOfStatement + " too, let's go do that";
 	}
 
 
@@ -141,7 +157,23 @@ public class ChatBot2
 		}
 		int psn = findKeyword (statement, "I want", 0);
 		String restOfStatement = statement.substring(psn + 6).trim();
-		return "Would you really be happy if you had " + restOfStatement + "?";
+		return "You got " + restOfStatement + " money?";
+	}
+
+	private String transformIlikeStatement(String statement)
+	{
+		//  Remove the final period, if there is one
+		statement = statement.trim();
+		String lastChar = statement.substring(statement
+				.length() - 1);
+		if (lastChar.equals("."))
+		{
+			statement = statement.substring(0, statement
+					.length() - 1);
+		}
+		int psn = findKeyword (statement, "I like", 0);
+		String restOfStatement = statement.substring(psn + 6).trim();
+		return "Yo you a real one, I like " + restOfStatement + " too!";
 	}
 
 
@@ -167,7 +199,7 @@ public class ChatBot2
 		int psnOfYou = findKeyword (statement, "you", psnOfI);
 
 		String restOfStatement = statement.substring(psnOfI + 1, psnOfYou).trim();
-		return "Why do you " + restOfStatement + " me?";
+		return "Shoot, I " + restOfStatement + " you too, so we cool or nah?";
 	}
 
 	private String transformbutterflyEffect(String statement)
@@ -200,6 +232,21 @@ public class ChatBot2
         }
         return null ;
     }
+	private String transformitAintHardToTell(String statement)
+	{
+		for (int i = 0; i < itAintHardToTell.length; i++)
+		{
+			if (itAintHardToTell[i].equals(statement))
+			{
+				if (i == itAintHardToTell.length - 1)
+				{
+					return "Aight aight that's all I remember I'm sorry";
+				}
+				return itAintHardToTell[i + 1];
+			}
+		}
+		return null ;
+	}
 
 
 
@@ -323,17 +370,62 @@ public class ChatBot2
 		}
 		return false;
 	}
+	private boolean trackLyricsIAHTT(String statement)
+	{
+		for (int i = 0; i < itAintHardToTell.length; i++)
+		{
+			if (itAintHardToTell[i].equals(statement))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	private String [] songNames ={"Butterfly Effect by Travis Scott",
+			"Touch The Sky by Kanye West",
+			"It Ain't Hard To Tell by Nas"
+	};
+	private String [] artistNames ={"21 Savage",
+			"A$AP Ferg",
+			"A$AP Rocky",
+			"A$AP Twelvyy",
+			"Big K.R.I.T",
+			"Big Pun",
+			"Biggie Smalls",
+			"Big Sean",
+			"A Boogie",
+			"Childish Gambino",
+			"CyHi da Prynce",
+			"Denzel Curry",
+			"DMX",
+			"Drake",
+			"Eric Bellinger",
+			"G-Eazy",
+			"Jaden Smith",
+			"Jay Rock",
+			"Jay Critch",
+			"Kanye West",
+			"Kendrick Lamar",
+			"KYLE",
+			"Lupe Fiasco",
+			"Rae Sremmurd",
+			"Snoop Dogg",
+			"Travis Scott",
+			"Ty Dolla $ign",
+			"Tyler, The Creator",
+			"Young Thug"
+	};
 
 	private String [] randomNeutralResponses = {"Yo that sounds valid, tell me more",
 			"Das tuff",
 			"Are you for real?",
-			"Yo you remember the lyrics to by ?",
+			"Yo you remember the lyrics to " + songNames[sn] + " ?",
 			"Don't trip man, iss all good",
-			"Yo you tryna bump some ?",
+			"Yo you tryna bump some " + artistNames[an] + "?",
 			"Yo lets get back to hip hop aight?"
 	};
-	private String [] randomAngryResponses = {"Yo what you tweakin' for?", "Do you actually wanna fight? I'm down", ""};
-	private String [] randomHappyResponses = {"H A P P Y, what's that spell?", "Yo today's been dumb valid so far", "You make me feel like a brand new pair of shoes."};
+	private String [] randomAngryResponses = {"Yo what you tweakin' for?", "Do you actually wanna fight? I'm down", "Yo I think we needa start over, I ain't feelin it man"};
+	private String [] randomHappyResponses = {"Everyone I talk to is a real G, you one too", "Yo today's been dumb valid so far", "I feel like I just hit it big in Vegas homie!"};
 	private String [] butterflyEffect = {"For this life I cannot change",
 			"Hidden hills, deep off in the main",
 			"M&M's, sweet like candy canes",
