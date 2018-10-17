@@ -61,13 +61,13 @@ public class ChatBot1
 
 		else if (findKeyword(statement, "no") >= 0)
 		{
-			response = "Oh ok then.";
+			response = "Oh ok then. What do you like to listen to?";
 			emotion--;
 		}
 
 		else if (findKeyword(statement, "sorry") >= 0)
 		{
-			response = "I forgive you.";
+			response = "I forgive you. Lets continue on.";
 			emotion++;
 		}
 
@@ -135,7 +135,7 @@ public class ChatBot1
 
 		else if (findKeyword(statement, "no") >= 0)
 		{
-			response = "Oh ok then. What do you like?";
+			response = "Oh, don't be like that.";
 			emotion--;
 		}
 
@@ -145,6 +145,7 @@ public class ChatBot1
 			emotion++;
 		}
 
+
 		else if (findKeyword(statement, "thanks") >= 0)
 		{
 			response = "Your welcome?";
@@ -152,14 +153,45 @@ public class ChatBot1
 
 		else if (findKeyword(statement, "Jin") >= 0)
 		{
-			response = "Great";
+			response = "Known mostly for his song series Kagerou Project, several of which include " +
+					"Artificial Enemy, Kagerou Days, Outer Science and recently Additional Memory. " +
+					"If you would like learn more about each song just type its name.";
 		}
 
+		else if (findKeyword(statement, "Artificial Enemy") >= 0)
+		{
+			response = "";
+		}
+
+		else if (findKeyword(statement, "Kagerou Days") >= 0)
+		{
+			response = "";
+		}
+		else if (findKeyword(statement, "Outer Science") >= 0)
+		{
+			response = "";
+		}
+		else if (findKeyword(statement, "Additional Memory") >= 0)
+		{
+			response = "";
+		}
 		else if (findKeyword(statement, "Deco*27") >= 0)
 		{
-			response = "That is also great.";
+			response = "Deco*27 is a song producer who makes pop and rock. Some songs he has made include " +
+					"Streaming Heart, Liar Dance and Ghost Rule.";
 		}
-
+		else if (findKeyword(statement, "Streaming Heart") >= 0)
+		{
+			response = "";
+		}
+		else if (findKeyword(statement, "Liar Dance") >= 0)
+		{
+			response = "";
+		}
+		else if (findKeyword(statement, "Ghost Rule") >= 0)
+		{
+			response = "";
+		}
 		else if (findKeyword(statement, "vocaloid",0) >= 0)
 		{
 			response = transformVocaloidStatement(statement);
