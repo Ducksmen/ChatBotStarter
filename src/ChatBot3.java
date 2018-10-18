@@ -1,5 +1,9 @@
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Random;
 import java.util.Scanner;
+import javazoom.jlgui.basicplayer.BasicPlayer;
+import javazoom.jlgui.basicplayer.BasicPlayerException;
 
 /**
  * A program to carry on conversations with a human user.
@@ -11,7 +15,11 @@ public class ChatBot3
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	int emotion = 0;
-
+	int responseStage = 0;
+	boolean musicRunning = false;
+	BasicPlayer player = new BasicPlayer();
+	String songName = "";
+	String pathToMp3 = "";
 
 
 	/**
@@ -90,6 +98,38 @@ public class ChatBot3
             response = "What do you mean maybe?";
             emotion = 0;
         }
+		else if (findKeyword(statement, "play Marry you") >= 0)
+		{
+			if (musicRunning == false) {
+				songName = "Marry you.mp3";
+				pathToMp3 = System.getProperty("user.dir") + "/" + songName;
+				player = new BasicPlayer();
+				try {
+					player.open(new URL("file:///" + pathToMp3));
+					player.play();
+				} catch (BasicPlayerException | MalformedURLException e) {
+					e.printStackTrace();
+				}
+				musicRunning = true;
+				response = "Here we go!";
+			}
+			else
+			{
+				response = "You can only play song at a time. Type 'stop music' and try again.";
+			}
+		}
+		else if (findKeyword(statement, "stop music",0) >= 0)
+		{
+			try {
+				player.open(new URL("file:///" + pathToMp3));
+				player.stop();
+			} catch (BasicPlayerException | MalformedURLException e)
+			{
+				e.printStackTrace();
+			}
+			musicRunning = false;
+			response = "Stopping the music";
+		}
 
 		// Response transforming I want to statement
 		else if (findKeyword(statement, "I want to", 0) >= 0)
@@ -286,7 +326,7 @@ public class ChatBot3
 			"You don't say.",
 			"It's all music to me.",
 	};
-	private String [] randomAngryResponses = {"Meanie", "You're missing out", "That's a feels bad!"};
+	private String [] randomAngryResponses = {"Unfortunate", "You're missing out", "That's a feels bad"};
 	private String [] randomHappyResponses = {"Huh, because I'm happy" +
             "Clap along if you feel like a room without a roof" +
             "Because I'm happy" +

@@ -30,7 +30,11 @@ public class ChatBotRunner
 
 
 
+<<<<<<< Updated upstream
 			chatbot2.chatLoop(statement);
+=======
+			chatbot3.chatLoop(statement);
+>>>>>>> Stashed changes
 
 
 			statement = in.nextLine();
