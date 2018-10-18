@@ -17,6 +17,7 @@ public class ChatBot1
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	int emotion = 0;
 	int responseStage = 0;
+	boolean musicRunning = false;
 	BasicPlayer player = new BasicPlayer();
 	String songName = "";
 	String pathToMp3 = "";
@@ -91,19 +92,19 @@ public class ChatBot1
 
         else if (findKeyword(statement, "yes") >= 0)
         {
-            response = "Vocaloid is music sung by software. Some artists include Jin, Deco*27 ";
+            response = "Vocaloid is music sung by software, they usually tell a story which has led to many people creating their own songs. Some artists include Jin and Orangestar.";
             responseStage++;
         }
 
         else if (findKeyword(statement, "ya") >= 0)
         {
-            response = "Vocaloid is music sung by software. Some artists include Jin, Deco*27 ";
+            response = "Vocaloid is music sung by software, they usually tell a story which has led to many people creating their own songs. Some artists include Jin and Orangestar.";
             responseStage++;
         }
 
         else if (findKeyword(statement, "sure") >= 0)
         {
-            response = "Vocaloid is music sung by software. Some artists include Jin, Deco*27 ";
+            response = "Vocaloid is music sung by software, they usually tell a story which has led to many people creating their own songs. Some artists include Jin and Orangestar.";
             responseStage++;
         }
 
@@ -163,51 +164,164 @@ public class ChatBot1
 		{
 			response = "Known mostly for his song series Kagerou Project, several of which include " +
 					"Artificial Enemy, Kagerou Days, Outer Science and recently Additional Memory. " +
-					"If you would like learn more about each song just type its name.";
+					"If you want to know more about each song just type it exactly to me.";
 		}
 
-		else if (findKeyword(statement, "Artificial Enemy") >= 0)
+		else if (findKeyword(statement, "Heat Haze Daze") >= 0)
 		{
-			response = "";
+			response = "Heat Haze Daze was Jin's third work and most notable having millions of views. " +
+					"If you want to listen to it type 'play hDaze'.";
 		}
-
-		else if (findKeyword(statement, "Kagerou Days") >= 0)
+		else if (findKeyword(statement, "play hDaze") >= 0)
 		{
-			response = "";
-		}
-		else if (findKeyword(statement, "Outer Science") >= 0)
-		{
-			response = "Here we go!";
-			songName = "Additional Memory.mp3";
-			pathToMp3 = System.getProperty("user.dir") +"/"+ songName;
-			player = new BasicPlayer();
-			try {
-				player.open(new URL("file:///" + pathToMp3));
-				player.play();
-			} catch (BasicPlayerException | MalformedURLException e) {
-				e.printStackTrace();
+			if (musicRunning == false) {
+				songName = "Heat Haze Daze.mp3";
+				pathToMp3 = System.getProperty("user.dir") + "/" + songName;
+				player = new BasicPlayer();
+				try {
+					player.open(new URL("file:///" + pathToMp3));
+					player.play();
+				} catch (BasicPlayerException | MalformedURLException e) {
+					e.printStackTrace();
+				}
+				musicRunning = true;
+				response = "Here we go!";
+			}
+			else
+			{
+				response = "You can only play song at a time. Type 'stop music' and try again.";
 			}
 		}
 		else if (findKeyword(statement, "Additional Memory") >= 0)
 		{
-			response = "";
+			response = "Additional Memory is Jin's most recent song and part of his new album soon to be released November 7th." +
+					"If you want to listen to it type 'play aMemory'.";
 		}
-		else if (findKeyword(statement, "Deco*27") >= 0)
+		else if (findKeyword(statement, "play aMemory") >= 0)
 		{
-			response = "Deco*27 is a song producer who makes pop and rock. Some songs he has made include " +
-					"Streaming Heart, Liar Dance and Ghost Rule.";
+			if (musicRunning == false) {
+				songName = "Additional Memory.mp3";
+				pathToMp3 = System.getProperty("user.dir") + "/" + songName;
+				player = new BasicPlayer();
+				try {
+					player.open(new URL("file:///" + pathToMp3));
+					player.play();
+				} catch (BasicPlayerException | MalformedURLException e) {
+					e.printStackTrace();
+				}
+				musicRunning = true;
+				response = "Here we go!";
+			}
+			else
+			{
+				response = "You can only play song at a time. Type 'stop music' and try again.";
+			}
 		}
-		else if (findKeyword(statement, "Streaming Heart") >= 0)
+
+		else if (findKeyword(statement, "Outer Science") >= 0)
 		{
-			response = "";
+			response = "Outer Science is Jin's 14th song and known for it's unsettling nature.If you want to listen to it type 'play oScience'.";
 		}
-		else if (findKeyword(statement, "Liar Dance") >= 0)
+		else if (findKeyword(statement, "play oScience") >= 0)
 		{
-			response = "";
+			if (musicRunning == false) {
+				songName = "Outer Science.mp3";
+				pathToMp3 = System.getProperty("user.dir") + "/" + songName;
+				player = new BasicPlayer();
+				try {
+					player.open(new URL("file:///" + pathToMp3));
+					player.play();
+				} catch (BasicPlayerException | MalformedURLException e) {
+					e.printStackTrace();
+				}
+				musicRunning = true;
+				response = "Here we go!";
+			}
+			else
+			{
+				response = "You can only play song at a time. Type 'stop music' and try again.";
+			}
 		}
-		else if (findKeyword(statement, "Ghost Rule") >= 0)
+		else if (findKeyword(statement, "Orangestar") >= 0)
 		{
-			response = "";
+			response = "Orangestar produces mainly memorable and sorrowful, poetic melodies. " +
+					"His most popular songs are Night Sky Patrol of Tomorrow, Alice in Freezer and Daybreak Frontline. " +
+					"If you want to know more about each song just type it exactly to me.";
+		}
+		else if (findKeyword(statement, "Night Sky Patrol of Tomorrow") >= 0)
+		{
+			response = "By far Orangestar's most popular song it conveys a sense of hope. " +
+					"If you want to listen to it type 'play nSky'.";
+		}
+		else if (findKeyword(statement, "play nSky") >= 0)
+		{
+			if (musicRunning == false) {
+				songName = "Night Sky Patrol of Tomorrow.mp3";
+				pathToMp3 = System.getProperty("user.dir") + "/" + songName;
+				player = new BasicPlayer();
+				try {
+					player.open(new URL("file:///" + pathToMp3));
+					player.play();
+				} catch (BasicPlayerException | MalformedURLException e) {
+					e.printStackTrace();
+				}
+				musicRunning = true;
+				response = "Here we go!";
+			}
+			else
+			{
+				response = "You can only play song at a time. Type 'stop music' and try again.";
+			}
+		}
+		else if (findKeyword(statement, "Alice in Freezer") >= 0)
+		{
+			response = "Alice in Freezer is an cheerful melody with soft piano sounds." +
+					"If you want to listen to it type 'play aFreezer'.";
+		}
+		else if (findKeyword(statement, "play aFreezer") >= 0)
+		{
+			if (musicRunning == false) {
+				songName = "Alice in Freezer.mp3";
+				pathToMp3 = System.getProperty("user.dir") + "/" + songName;
+				player = new BasicPlayer();
+				try {
+					player.open(new URL("file:///" + pathToMp3));
+					player.play();
+				} catch (BasicPlayerException | MalformedURLException e) {
+					e.printStackTrace();
+				}
+				musicRunning = true;
+				response = "Here we go!";
+			}
+			else
+			{
+				response = "You can only play song at a time. Type 'stop music' and try again.";
+			}
+		}
+		else if (findKeyword(statement, "Daybreak Frontline") >= 0)
+		{
+			response = "Daybreak Frontline is an upbeat song that can help motivate you." +
+					"If you want to listen to it type 'play dFrontline'.";
+		}
+		else if (findKeyword(statement, "dFrontline") >= 0)
+		{
+			if (musicRunning == false) {
+				songName = "Daybreak Frontline.mp3";
+				pathToMp3 = System.getProperty("user.dir") + "/" + songName;
+				player = new BasicPlayer();
+				try {
+					player.open(new URL("file:///" + pathToMp3));
+					player.play();
+				} catch (BasicPlayerException | MalformedURLException e) {
+					e.printStackTrace();
+				}
+				musicRunning = true;
+				response = "Here we go!";
+			}
+			else
+			{
+				response = "You can only play song at a time. Type 'stop music' and try again.";
+			}
 		}
 		else if (findKeyword(statement, "vocaloid",0) >= 0)
 		{
@@ -222,6 +336,7 @@ public class ChatBot1
 			{
 				e.printStackTrace();
 			}
+			musicRunning = false;
 			response = "Stopping the music";
 		}
 		else
