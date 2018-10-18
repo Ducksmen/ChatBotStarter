@@ -1,5 +1,10 @@
 import java.util.Random;
 import java.util.Scanner;
+import java.net.MalformedURLException;
+import java.net.URL;
+import javazoom.jlgui.basicplayer.BasicPlayer;
+import javazoom.jlgui.basicplayer.BasicPlayerException;
+
 //Jack Hoang
 /**
  * A program to carry on conversations with a human user.
@@ -12,6 +17,9 @@ public class ChatBot1
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	int emotion = 0;
 	int responseStage = 0;
+	BasicPlayer player = new BasicPlayer();
+	String songName = "";
+	String pathToMp3 = "";
 
 	/**
 	 * Runs the conversation for this particular chatbot, should allow switching to other chatbots.
@@ -169,7 +177,16 @@ public class ChatBot1
 		}
 		else if (findKeyword(statement, "Outer Science") >= 0)
 		{
-			response = "";
+			response = "Here we go!";
+			songName = "Additional Memory.mp3";
+			pathToMp3 = System.getProperty("user.dir") +"/"+ songName;
+			player = new BasicPlayer();
+			try {
+				player.open(new URL("file:///" + pathToMp3));
+				player.play();
+			} catch (BasicPlayerException | MalformedURLException e) {
+				e.printStackTrace();
+			}
 		}
 		else if (findKeyword(statement, "Additional Memory") >= 0)
 		{
@@ -195,6 +212,17 @@ public class ChatBot1
 		else if (findKeyword(statement, "vocaloid",0) >= 0)
 		{
 			response = transformVocaloidStatement(statement);
+		}
+		else if (findKeyword(statement, "stop music",0) >= 0)
+		{
+			try {
+				player.open(new URL("file:///" + pathToMp3));
+				player.stop();
+			} catch (BasicPlayerException | MalformedURLException e)
+			{
+				e.printStackTrace();
+			}
+			response = "Stopping the music";
 		}
 		else
 		{
