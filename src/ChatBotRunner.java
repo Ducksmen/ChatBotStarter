@@ -27,14 +27,8 @@ public class ChatBotRunner
 		{
 			//Use Logic to control which chatbot is handling the conversation\
 			//This example has only chatbot1
-
-
-
-<<<<<<< Updated upstream
-			chatbot2.chatLoop(statement);
-=======
-			chatbot3.chatLoop(statement);
->>>>>>> Stashed changes
+			
+			chatbot1.chatLoop(statement);
 
 
 			statement = in.nextLine();
