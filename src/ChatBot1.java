@@ -92,19 +92,22 @@ public class ChatBot1
 
         else if (findKeyword(statement, "yes") >= 0)
         {
-            response = "Vocaloid is music sung by software, they usually tell a story which has led to many people creating their own songs. Some artists include Jin and Orangestar.";
+            response = "Vocaloid is music sung by software, they usually tell a story which has led to many people creating their own songs. Some artists include Jin and Orangestar. " +
+					"If you want to know more about them and their songs just type their name.";
             responseStage++;
         }
 
         else if (findKeyword(statement, "ya") >= 0)
         {
-            response = "Vocaloid is music sung by software, they usually tell a story which has led to many people creating their own songs. Some artists include Jin and Orangestar.";
+            response = "Vocaloid is music sung by software, they usually tell a story which has led to many people creating their own songs. Some artists include Jin and Orangestar. " +
+					"If you want to know more about them and their songs just type their name.";
             responseStage++;
         }
 
         else if (findKeyword(statement, "sure") >= 0)
         {
-            response = "Vocaloid is music sung by software, they usually tell a story which has led to many people creating their own songs. Some artists include Jin and Orangestar.";
+            response = "Vocaloid is music sung by software, they usually tell a story which has led to many people creating their own songs. Some artists include Jin and Orangestar. " +
+					"If you want to know more about them and their songs just type their name.";
             responseStage++;
         }
 
