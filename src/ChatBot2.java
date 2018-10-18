@@ -1,5 +1,9 @@
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Random;
 import java.util.Scanner;
+import javazoom.jlgui.basicplayer.BasicPlayer;
+import javazoom.jlgui.basicplayer.BasicPlayerException;
 
 /**
  * A program to carry on conversations with a human user.
@@ -13,6 +17,11 @@ public class ChatBot2
 	int emotion = 0;
 	int sn = 0;
 	int an = 0;
+	int responseStage = 0;
+	boolean musicRunning = false;
+	BasicPlayer player = new BasicPlayer();
+	String songName = "";
+	String pathToMp3 = "";
 
 
 	/**
@@ -82,6 +91,38 @@ public class ChatBot2
 			emotion--;
 		}
 
+		else if (findKeyword(statement, "play Check") >= 0)
+		{
+			if (musicRunning == false) {
+				songName = "Check.mp3";
+				pathToMp3 = System.getProperty("user.dir") + "/" + songName;
+				player = new BasicPlayer();
+				try {
+					player.open(new URL("file:///" + pathToMp3));
+					player.play();
+				} catch (BasicPlayerException | MalformedURLException e) {
+					e.printStackTrace();
+				}
+				musicRunning = true;
+				response = "Here we go!";
+			}
+			else
+			{
+				response = "You can only play song at a time. Type 'stop music' and try again.";
+			}
+		}
+		else if (findKeyword(statement, "stop music",0) >= 0)
+		{
+			try {
+				player.open(new URL("file:///" + pathToMp3));
+				player.stop();
+			} catch (BasicPlayerException | MalformedURLException e)
+			{
+				e.printStackTrace();
+			}
+			musicRunning = false;
+			response = "Stopping the music";
+		}
 		else if (findKeyword(statement, "hip hop") >= 0)
 		{
 			response = "Yo my bad I just get hype whenever I hear hip hop";
@@ -107,7 +148,7 @@ public class ChatBot2
 		}
 		else
 		{
-			an = (int)Math.random()*30;
+			an = (int)Math.random()*31;
 			sn = (int)Math.random()*3;
 			response = getRandomResponse();
 		}
@@ -407,6 +448,7 @@ public class ChatBot2
 			"Kanye West",
 			"Kendrick Lamar",
 			"KYLE",
+			"Nas",
 			"Lupe Fiasco",
 			"Rae Sremmurd",
 			"Snoop Dogg",
