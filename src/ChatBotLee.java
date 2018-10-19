@@ -11,7 +11,11 @@ import javazoom.jlgui.basicplayer.BasicPlayerException;
  * @author Brooklyn Tech CS Department
  * @version September 2018
  */
-public class ChatBot3
+
+/**
+ * This sets the song to make it ready to play.
+ */
+public class ChatBotLee
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	int emotion = 0;
@@ -53,7 +57,7 @@ public class ChatBot3
 	}
 	
 	/**
-	 * Gives a response to a user statement
+	 * Gives a response to a user statement or plays a song depending on the goal
 	 * 
 	 * @param statement
 	 *            the user statement
@@ -99,19 +103,23 @@ public class ChatBot3
         }
 		else if (findKeyword(statement, "songs") >= 0)
 		{
-			response = "Here are some songs you can listen to, just type 'play <Insert Song Name Here>'. Marry You, Sad Song and Happy";
+			response = "Here are some songs you can listen to, just type 'play <Insert Song Name Here>'. Marry You, Sad Song, Happy East side";
 			emotion = 0;
 		}
 		else if (findKeyword(statement, "play Marry You") >= 0)
 		{
-			if (musicRunning == false) {
+			if (musicRunning == false)
+			{
 				songName = "Marry you.mp3";
 				pathToMp3 = System.getProperty("user.dir") + "/" + songName;
 				player = new BasicPlayer();
-				try {
+				try
+				{
 					player.open(new URL("file:///" + pathToMp3));
 					player.play();
-				} catch (BasicPlayerException | MalformedURLException e) {
+				}
+				catch (BasicPlayerException | MalformedURLException e)
+				{
 					e.printStackTrace();
 				}
 				musicRunning = true;
@@ -124,14 +132,18 @@ public class ChatBot3
 		}
 		else if (findKeyword(statement, "play Happy") >= 0)
 		{
-			if (musicRunning == false) {
+			if (musicRunning == false)
+			{
 				songName = "Happy.mp3";
 				pathToMp3 = System.getProperty("user.dir") + "/" + songName;
 				player = new BasicPlayer();
-				try {
+				try
+				{
 					player.open(new URL("file:///" + pathToMp3));
 					player.play();
-				} catch (BasicPlayerException | MalformedURLException e) {
+				}
+				catch (BasicPlayerException | MalformedURLException e)
+				{
 					e.printStackTrace();
 				}
 				musicRunning = true;
@@ -144,14 +156,40 @@ public class ChatBot3
 		}
 		else if (findKeyword(statement, "play Sad Song") >= 0)
 		{
-			if (musicRunning == false) {
+			if (musicRunning == false)
+			{
 				songName = "Sad Song.mp3";
 				pathToMp3 = System.getProperty("user.dir") + "/" + songName;
 				player = new BasicPlayer();
-				try {
+				try
+				{
 					player.open(new URL("file:///" + pathToMp3));
 					player.play();
-				} catch (BasicPlayerException | MalformedURLException e) {
+				} catch (BasicPlayerException | MalformedURLException e)
+				{
+					e.printStackTrace();
+				}
+				musicRunning = true;
+				response = "Here we go!";
+			}
+			else
+			{
+				response = "You can only play song at a time. Type 'stop music' and try again.";
+			}
+		}
+		else if (findKeyword(statement, "play East side") >= 0)
+		{
+			if (musicRunning == false)
+			{
+				songName = "East side.mp3";
+				pathToMp3 = System.getProperty("user.dir") + "/" + songName;
+				player = new BasicPlayer();
+				try
+				{
+					player.open(new URL("file:///" + pathToMp3));
+					player.play();
+				} catch (BasicPlayerException | MalformedURLException e)
+				{
 					e.printStackTrace();
 				}
 				musicRunning = true;
@@ -164,7 +202,8 @@ public class ChatBot3
 		}
 		else if (findKeyword(statement, "stop music",0) >= 0)
 		{
-			try {
+			try
+			{
 				player.open(new URL("file:///" + pathToMp3));
 				player.stop();
 			} catch (BasicPlayerException | MalformedURLException e)
@@ -347,7 +386,7 @@ public class ChatBot3
 
 
 	/**
-	 * Pick a default response to use if nothing else fits.
+	 * Pick a default response to use if nothing else fits and sings song lyrics out when its happy.
 	 * @return a non-committal string
 	 */
 	private String getRandomResponse ()
