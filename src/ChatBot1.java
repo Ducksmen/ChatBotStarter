@@ -49,7 +49,7 @@ public class ChatBot1
 	 */;
 	public String getGreeting()
 	{
-		return "Hey, wanna know more about Vocaloid?";
+		return "So your interested in vocaloid right?";
 	}
 
 	/**

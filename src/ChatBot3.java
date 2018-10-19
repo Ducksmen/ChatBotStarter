@@ -15,7 +15,6 @@ public class ChatBot3
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	int emotion = 0;
-	int responseStage = 0;
 	boolean musicRunning = false;
 	BasicPlayer player = new BasicPlayer();
 	String songName = "";
@@ -98,10 +97,55 @@ public class ChatBot3
             response = "What do you mean maybe?";
             emotion = 0;
         }
-		else if (findKeyword(statement, "play Marry you") >= 0)
+		else if (findKeyword(statement, "songs") >= 0)
+		{
+			response = "Here are some songs you can listen to, just type 'play <Insert Song Name Here>'. Marry You, Sad Song and Happy";
+			emotion = 0;
+		}
+		else if (findKeyword(statement, "play Marry You") >= 0)
 		{
 			if (musicRunning == false) {
 				songName = "Marry you.mp3";
+				pathToMp3 = System.getProperty("user.dir") + "/" + songName;
+				player = new BasicPlayer();
+				try {
+					player.open(new URL("file:///" + pathToMp3));
+					player.play();
+				} catch (BasicPlayerException | MalformedURLException e) {
+					e.printStackTrace();
+				}
+				musicRunning = true;
+				response = "Here we go!";
+			}
+			else
+			{
+				response = "You can only play song at a time. Type 'stop music' and try again.";
+			}
+		}
+		else if (findKeyword(statement, "play Happy") >= 0)
+		{
+			if (musicRunning == false) {
+				songName = "Happy.mp3";
+				pathToMp3 = System.getProperty("user.dir") + "/" + songName;
+				player = new BasicPlayer();
+				try {
+					player.open(new URL("file:///" + pathToMp3));
+					player.play();
+				} catch (BasicPlayerException | MalformedURLException e) {
+					e.printStackTrace();
+				}
+				musicRunning = true;
+				response = "Here we go!";
+			}
+			else
+			{
+				response = "You can only play song at a time. Type 'stop music' and try again.";
+			}
+		}
+		else if (findKeyword(statement, "play Sad Song") >= 0)
+		{
+			if (musicRunning == false) {
+				songName = "Sad Song.mp3";
 				pathToMp3 = System.getProperty("user.dir") + "/" + songName;
 				player = new BasicPlayer();
 				try {
