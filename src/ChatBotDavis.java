@@ -11,7 +11,7 @@ import javazoom.jlgui.basicplayer.BasicPlayerException;
  * @author Brooklyn Tech CS Department
  * @version September 2018
  */
-public class ChatBot2
+public class ChatBotDavis
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	int emotion = 0;
@@ -104,13 +104,33 @@ public class ChatBot2
 					e.printStackTrace();
 				}
 				musicRunning = true;
-				response = "Here we go!";
+				response = "Yo Check is valid lemme hop on it";
 			}
 			else
 			{
-				response = "You can only play song at a time. Type 'stop music' and try again.";
+				response = "You gotta type 'stop music' and try again homie, you can only play one song at at time";
 			}
 		}
+        else if (findKeyword(statement, "play Good Night") >= 0)
+        {
+            if (musicRunning == false) {
+                songName = "Good Night.mp3";
+                pathToMp3 = System.getProperty("user.dir") + "/" + songName;
+                player = new BasicPlayer();
+                try {
+                    player.open(new URL("file:///" + pathToMp3));
+                    player.play();
+                } catch (BasicPlayerException | MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                musicRunning = true;
+                response = "Yo Good Night is valid lemme hop on it";
+            }
+            else
+            {
+                response = "You gotta type 'stop music' and try again homie, you can only play one song at at time";
+            }
+        }
 		else if (findKeyword(statement, "stop music",0) >= 0)
 		{
 			try {
@@ -121,7 +141,7 @@ public class ChatBot2
 				e.printStackTrace();
 			}
 			musicRunning = false;
-			response = "Stopping the music";
+			response = "Aight I'll stop it";
 		}
 		else if (findKeyword(statement, "hip hop") >= 0)
 		{
@@ -461,13 +481,23 @@ public class ChatBot2
 	private String [] randomNeutralResponses = {"Yo that sounds valid, tell me more",
 			"Das tuff",
 			"Are you for real?",
-			"Yo you remember the lyrics to " + songNames[sn] + " ?",
-			"Don't trip man, iss all good",
+			"Yo you remember the lyrics to " + songNames[sn] + "?",
+			"Don't trip, iss all good",
 			"Yo you tryna bump some " + artistNames[an] + "?",
 			"Yo lets get back to hip hop aight?"
 	};
-	private String [] randomAngryResponses = {"Yo what you tweakin' for?", "Do you actually wanna fight? I'm down", "Yo I think we needa start over, I ain't feelin it man"};
-	private String [] randomHappyResponses = {"Everyone I talk to is a real G, you one too", "Yo today's been dumb valid so far", "I feel like I just hit it big in Vegas homie!"};
+	private String [] randomAngryResponses = {"Yo what you tweakin' for?",
+            "Do you actually wanna fight? I'm down",
+            "Yo I think we needa start over, I ain't feelin it",
+            "Yo you remember the lyrics to " + songNames[sn] + "?",
+            "Yo you tryna bump some " + artistNames[an] + "?"
+    };
+	private String [] randomHappyResponses = {"Everyone I talk to is a real G, you one too",
+            "Yo you tryna bump some " + artistNames[an] + "?",
+            "Yo you remember the lyrics to " + songNames[sn] + "?",
+            "Yo today's been dumb valid so far",
+            "I feel like I just hit it big in Vegas homie!"
+	};
 	private String [] butterflyEffect = {"For this life I cannot change",
 			"Hidden hills, deep off in the main",
 			"M&M's, sweet like candy canes",
