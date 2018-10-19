@@ -14,7 +14,7 @@ public class ChatBotRunner
 	public static void main(String[] args)
 	{
 		ChatBotHoang chatbot1 = new ChatBotHoang();
-		ChatBot2 chatbot2 = new ChatBot2();
+		ChatBotDavis chatbot2 = new ChatBotDavis();
 		ChatBotLee chatbot3 = new ChatBotLee();
 		
 
