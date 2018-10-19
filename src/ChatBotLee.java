@@ -80,19 +80,19 @@ public class ChatBotLee
 		
 		else if (findKeyword(statement, "yes") >= 0)
 		{
-			response = "What are some of the artists that you listen to?";
+			response = "Here are some songs you can listen to, just type 'play <Insert Song Name Here>'. The limited songs we currently have are Marry You, Sad Song, Happy, and East side!";
 			emotion++;
 		}
 
         else if (findKeyword(statement, "yea") >= 0)
         {
-            response = "What are some of the artists that you listen to?";
+            response = "Here are some songs you can listen to, just type 'play <Insert Song Name Here>'. The limited songs we currently have are Marry You, Sad Song, Happy, and East side";
             emotion++;
         }
 
         else if (findKeyword(statement, "sure") >= 0)
         {
-            response = "What are some of the artists that you listen to?";
+            response = "Here are some songs you can listen to, just type 'play <Insert Song Name Here>'. The limited songs we currently have are Marry You, Sad Song, Happy, and East side";
             emotion++;
         }
 
@@ -103,7 +103,7 @@ public class ChatBotLee
         }
 		else if (findKeyword(statement, "songs") >= 0)
 		{
-			response = "Here are some songs you can listen to, just type 'play <Insert Song Name Here>'. Marry You, Sad Song, Happy East side";
+			response = "Here are some songs you can listen to, just type 'play <Insert Song Name Here>'. The limited songs we currently have are Marry You, Sad Song, Happy, and East side";
 			emotion = 0;
 		}
 		else if (findKeyword(statement, "play Marry You") >= 0)
@@ -410,24 +410,24 @@ public class ChatBotLee
 			"It's all music to me.",
 	};
 	private String [] randomAngryResponses = {"Unfortunate", "You're missing out", "That's a feels bad"};
-	private String [] randomHappyResponses = {"Huh, because I'm happy" +
-            "Clap along if you feel like a room without a roof" +
-            "Because I'm happy" +
-            "Clap along if you feel like happiness is the truth" +
-            "Because I'm happy" +
-            "Clap along if you know what happiness is to you" +
-            "Because I'm happy" +
-            "Clap along if you feel like that's what you wanna do",
-            "I had a dream so big and loud" +
-            "I jumped so high I touched the clouds" +
-            "Wo-o-o-o-o-oh, wo-o-o-o-o-oh" +
-            "I stretched my hands out to the sky" +
-            "We danced with monsters through the night" +
-            "Wo-o-o-o-o-oh, wo-o-o-o-o-oh",
-            "Oh" +
-            "It's a beautiful night, we're looking for something dumb to do" +
-            "Hey baby, I think I wanna marry you" +
-            "Is it the look in your eyes, or is it this dancing juice" +
-            "Who cares baby, I think I wanna marry you"};
+	private String [] randomHappyResponses = {"Huh, because I'm happy " +
+            "Clap along if you feel like a room without a roof " +
+            "Because I'm happy " +
+            "Clap along if you feel like happiness is the truth " +
+            "Because I'm happy " +
+            "Clap along if you know what happiness is to you " +
+            "Because I'm happy " +
+            "Clap along if you feel like that's what you wanna do ",
+            "I had a dream so big and loud " +
+            "I jumped so high I touched the clouds " +
+            "Wo-o-o-o-o-oh, wo-o-o-o-o-oh " +
+            "I stretched my hands out to the sky " +
+            "We danced with monsters through the night " +
+            "Wo-o-o-o-o-oh, wo-o-o-o-o-oh ",
+            "Oh " +
+            "It's a beautiful night, we're looking for something dumb to do " +
+            "Hey baby, I think I wanna marry you " +
+            "Is it the look in your eyes, or is it this dancing juice " +
+            "Who cares baby, I think I wanna marry you "};
 	
 }
