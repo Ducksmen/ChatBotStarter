@@ -29,8 +29,6 @@ public class ChatBotRunner
 				//This example has only chatbot1
 				chatbot1.chatLoop(statement);
 				statement = in.nextLine();
-
-
 			}
 		}
 		if (statement.equals("rap")) {
@@ -45,8 +43,6 @@ public class ChatBotRunner
 				//Use Logic to control which chatbot is handling the conversation
 				chatbot3.chatLoop(statement);
 				statement = in.nextLine();
-
-
 			}
 		}
 	}
