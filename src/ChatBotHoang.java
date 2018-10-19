@@ -13,7 +13,7 @@ import javazoom.jlgui.basicplayer.BasicPlayerException;
  * @version September 2018
  */
 
-public class ChatBot1
+public class ChatBotHoang
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
 	//responseStage changes from regular conversation into talks about vocaloid. Changes how the bot responds to the same statement.
@@ -142,6 +142,11 @@ public class ChatBot1
 		return response;
 	}
 
+	/**
+	 * After the user says yes the bot will in depth about vocaloid
+	 * @param statement What the user types and enters.
+	 * @return either a statement or plays a song. I can continue to talk while the song is playing.
+	 */
 	public String getResponse2(String statement)
 	{
 		String response = "";
@@ -172,7 +177,7 @@ public class ChatBot1
 		else if (findKeyword(statement, "Jin") >= 0)
 		{
 			response = "Known mostly for his song series Kagerou Project, several of which include " +
-					"Artificial Enemy, Kagerou Days, Outer Science and recently Additional Memory. " +
+					"Heat Haze Daze, Outer Science and recently Additional Memory. " +
 					"If you want to know more about each song just type it exactly to me.";
 		}
 
@@ -194,7 +199,7 @@ public class ChatBot1
 					e.printStackTrace();
 				}
 				musicRunning = true;
-				response = "Here we go!";
+				response = "Here we go! To stop the music type 'stop music'.";
 			}
 			else
 			{
@@ -219,7 +224,7 @@ public class ChatBot1
 					e.printStackTrace();
 				}
 				musicRunning = true;
-				response = "Here we go!";
+				response = "Here we go! To stop the music type 'stop music'.";
 			}
 			else
 			{
@@ -244,7 +249,7 @@ public class ChatBot1
 					e.printStackTrace();
 				}
 				musicRunning = true;
-				response = "Here we go!";
+				response = "Here we go! To stop the music type 'stop music'.";
 			}
 			else
 			{
@@ -275,7 +280,7 @@ public class ChatBot1
 					e.printStackTrace();
 				}
 				musicRunning = true;
-				response = "Here we go!";
+				response = "Here we go! To stop the music type 'stop music'.";
 			}
 			else
 			{
@@ -300,7 +305,7 @@ public class ChatBot1
 					e.printStackTrace();
 				}
 				musicRunning = true;
-				response = "Here we go!";
+				response = "Here we go! To stop the music type 'stop music'.";
 			}
 			else
 			{
@@ -325,7 +330,7 @@ public class ChatBot1
 					e.printStackTrace();
 				}
 				musicRunning = true;
-				response = "Here we go!";
+				response = "Here we go! To stop the music type 'stop music'.";
 			}
 			else
 			{
