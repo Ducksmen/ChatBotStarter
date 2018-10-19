@@ -12,9 +12,15 @@ import javazoom.jlgui.basicplayer.BasicPlayerException;
  * @author Brooklyn Tech CS Department
  * @version September 2018
  */
+
 public class ChatBot1
 {
 	//emotion can alter the way our bot responds. Emotion can become more negative or positive over time.
+	//responseStage changes from regular conversation into talks about vocaloid. Changes how the bot responds to the same statement.
+	//musicRunning this boolean makes it so only one instance of a song can be run.
+	//player allows music to be played.
+	//songName keeps track of the song name.
+	//pathToMp3 is what allows the bot to go directly to the mp3.
 	int emotion = 0;
 	int responseStage = 0;
 	boolean musicRunning = false;
